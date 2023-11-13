@@ -5,21 +5,25 @@ import 'package:limpeza_certa/app/models/area_model.dart';
 class BuildingModel {
   final int id;
   final String name;
+  final String condominiumCnpj;
   final List<AreaModel> areaList;
   BuildingModel({
     required this.id,
     required this.name,
+    required this.condominiumCnpj,
     required this.areaList,
   });
 
   BuildingModel copyWith({
     int? id,
     String? name,
+    String? condominiumCnpj,
     List<AreaModel>? areaList,
   }) {
     return BuildingModel(
       id: id ?? this.id,
       name: name ?? this.name,
+      condominiumCnpj: condominiumCnpj ?? this.condominiumCnpj,
       areaList: areaList ?? this.areaList,
     );
   }
@@ -28,7 +32,7 @@ class BuildingModel {
     return <String, dynamic>{
       'id': id,
       'name': name,
-      'areaList': areaList.map((x) => x.toMap()).toList(),
+      'condominium_cnpj': condominiumCnpj,
     };
   }
 
@@ -36,6 +40,7 @@ class BuildingModel {
     return BuildingModel(
       id: map['id'] as int,
       name: map['name'] as String,
+      condominiumCnpj: map['condominiumCnpj'] as String,
       areaList: List<AreaModel>.from(
         (map['areaList'] as List<int>).map<AreaModel>(
           (x) => AreaModel.fromMap(x as Map<String, dynamic>),
@@ -50,8 +55,9 @@ class BuildingModel {
       BuildingModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() =>
-      'BuildingModel(id: $id, name: $name, areaList: $areaList)';
+  String toString() {
+    return 'BuildingModel(id: $id, name: $name, condominiumCnpj: $condominiumCnpj, areaList: $areaList)';
+  }
 
   @override
   bool operator ==(covariant BuildingModel other) {
@@ -61,5 +67,7 @@ class BuildingModel {
   }
 
   @override
-  int get hashCode => id.hashCode;
+  int get hashCode {
+    return id.hashCode;
+  }
 }
