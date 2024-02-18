@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:limpeza_certa/app/features/splash/view/splash_screen.dart';
 
-enum Route {
+enum AppRoute {
   splash(url: '/'),
-  login(url: '/login'),
+  auth(url: '/auth'),
   home(url: '/home');
 
-  const Route({required this.url});
+  const AppRoute({required this.url});
   final String url;
 }
 
-final routes = <String, Widget Function(BuildContext)>{};
+final routes = <String, Widget Function(BuildContext)>{
+  AppRoute.splash.url: (context) => const SplashScreen(),
+};
